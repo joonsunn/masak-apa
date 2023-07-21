@@ -1,3 +1,8 @@
 .env
 requests
 node_modules
+fly.toml
+Dockerfile
+.flyPGsecrets
+.dockerignore
+build

@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  /* max-width: 500px; */
+  margin: auto;
+  padding: 2vw;
 }
 
 .App-logo {
@@ -35,4 +38,63 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+	padding: 30px;
+}
+
+
+
+.page-element {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	max-width: 500px;
+	margin: auto;
+}
+
+#reroll-button {
+	/* width: 50px; */
+	/* margin: auto; */
+}
+
+.main-ingredient-dropdown {
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main-ingredient-content > div {
+	padding: 20px;
+	/* display:flex;
+	flex-direction: column; */
+	
+}
+
+.text {
+	/* margin: auto; */
+}
+
+.navbar {
+	justify-content: space-around;
+	max-width: 400px;
+	margin: auto;
+	/* align-self: center; */
+}
+
+.new-ingredient-input {
+	display: flex;
+}
+
+.new-dish-top {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	/* background-color: lightblue; */
+	padding: 5px;
+}
+
+.new-dish-input {
+	display: flex;
 }

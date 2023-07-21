@@ -2,78 +2,54 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { AddMainIngredientForm } from './components/AddMainIngredientForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeDistinctMainIngredientsList } from './reducers/distinctMainIngredientsListReducer';
+import { initializeSelectedMainIngredient, setSelectedMainIngredient } from './reducers/selectedMainIngredientReducer';
+import { initializeRandomDish, getRandomDish, setRandomDish } from './reducers/randomDishReducer';
+import dishService from './services/dishService';
+import { AddNewDishForm } from './components/AddNewDishForm';
+import Notification from './components/Notification';
+import { initializeAllMainIngredients } from './reducers/allMainIngredientsReducer';
+import MainSelector from './components/MainSelector';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Root from './routes/root';
+import { Navbar, Nav } from 'react-bootstrap';
 
 
 
 function App() {
-	const [distinctMainIngredientList, setDistinctMainIngredientList] = useState([])
-	const [selectedMainIngredient, setSelectedMainIngredient] = useState('')
-	const [randomDish, setRandomDish] = useState('')
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		getDistinctMainIngredients()
-		// setSelectedMainIngredient(distinctMainIngredientList[0])
-	}, [])
-
-	const baseUrl = `http://localhost:3003/food/distinct-main-ingredients`
-	
-	const getDistinctMainIngredients = async () => {
-		const distinctMainIngredientList = await axios.get(baseUrl)
-		console.log(distinctMainIngredientList.data)
-
-		setDistinctMainIngredientList(distinctMainIngredientList.data)
-		setSelectedMainIngredient(distinctMainIngredientList.data[0])
-		const randomDish = await getRandomDishWithSelectedMainIngredient(distinctMainIngredientList.data[0])
-		setRandomDish(randomDish)
-	}
-
-	const getRandomDishWithSelectedMainIngredient = async (mainIngredient) => {
-		const randomDish = await axios.get(`http://localhost:3003/food/random-food-by-mainIngredient/${mainIngredient}`)
-		
-		return randomDish.data
-	}
-
-	const handleChangeMainIngredient = async (event) => {
-		event.preventDefault();
-		setSelectedMainIngredient(event.target.value)
-		// const randomDish = await axios.get(`http://localhost:3003/food/random-food-by-mainIngredient/${event.target.value}`)
-		const randomDish = await getRandomDishWithSelectedMainIngredient(event.target.value)
-		// console.log(randomDish.dishName)
-		setRandomDish(randomDish)
-	}
-
-	const handleRerollClick = async (event) => {
-		event.preventDefault()
-		let sameDish = true
-		while (sameDish) {
-			const newRandomDish = await getRandomDishWithSelectedMainIngredient(selectedMainIngredient)
-			sameDish = newRandomDish.dishName === randomDish.dishName
-			if (!sameDish) {
-				setRandomDish(newRandomDish)
-			}
+		const runFirst = async () => {
+			dispatch(initializeDistinctMainIngredientsList())
+			dispatch(initializeSelectedMainIngredient())
+			dispatch(initializeRandomDish())
+			dispatch(initializeAllMainIngredients())
 		}
-	}
-	
+		runFirst()
+
+	}, [dispatch])
+
+	useEffect(() => {document.title = `Masak Apa Hari Ini?`})
+
 	return (
-    <div className="App">
-		Hello World
-		{distinctMainIngredientList.map((item, index) => <li key={index}>{item}</li>)}
-		<div>
-			<label className='dropdown'>
-				What to cook?
-				<select value={selectedMainIngredient} onChange={handleChangeMainIngredient}>
-						{distinctMainIngredientList.map((item, index) => <option value={item} key={index}>{item}</option>)}
-				</select>
-			</label>
-				<button onClick={handleRerollClick}>Reroll</button>
-			<div className='we-cook'>We cook {selectedMainIngredient}!</div>
-			<div className='random-dish'>{randomDish.dishName}</div>
-			<div>
-				Ingredients:
-				<ul>{randomDish? randomDish.dishIngredients.map((ingredient, index) => <li key={index}>{ingredient}</li>) :''}</ul>
+		<BrowserRouter>
+			<div className="App">
+				<NavBar></NavBar>
+				<Notification></Notification>
+				<div className='container'>
+					<Routes>
+							<Route path='/' element={<MainSelector></MainSelector>}/>
+							<Route path='/addMainIngredient' element={<AddMainIngredientForm></AddMainIngredientForm>}></Route>
+							<Route path='/addNewDish' element={<AddNewDishForm></AddNewDishForm>}></Route>
+							<Route path='*' element={<MainSelector></MainSelector>}></Route>
+					</Routes>
+				</div>
 			</div>
-		</div>
-    </div>
+		</BrowserRouter>
   );
 }
 
