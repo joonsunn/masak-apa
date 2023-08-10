@@ -4,6 +4,7 @@ import selectedMainIngredientReducer from "./reducers/selectedMainIngredientRedu
 import randomDishReducer from "./reducers/randomDishReducer";
 import notificationReducer from "./reducers/notificationReducer";
 import allMainIngredientsReducer from "./reducers/allMainIngredientsReducer";
+import allDishesReducer from "./reducers/allDishesReducer";
 
 export const store = configureStore({
 	reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
 		selectedMainIngredient: selectedMainIngredientReducer,
 		randomDish: randomDishReducer,
 		notification: notificationReducer,
-		allMainIngredients: allMainIngredientsReducer
+		allMainIngredients: allMainIngredientsReducer,
+		allDishes: allDishesReducer
 	}
 })
 

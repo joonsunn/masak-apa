@@ -15,7 +15,8 @@ dishRouter.get('/', async (request, response) => {
 
 dishRouter.get('/alldishes', async (request, response) => {
 	const allDishes = await Dish.findAll({})
-	return response.json(allDishes)
+	const allDishes2 = await sequelize.query('SELECT dishes.id as dish_id, dishes.dish_name, main_ingredients.name as main_ingredient_name FROM dishes LEFT JOIN main_ingredients on dishes.main_ingredient_id = main_ingredients.id', {type: QueryTypes.SELECT})
+	return response.json(allDishes2)
 })
 
 // dishRouter.post('/newdish', async (request, response) => {

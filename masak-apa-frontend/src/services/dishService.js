@@ -2,6 +2,11 @@ import axios from "axios"
 
 const baseUrl = '/dish'
 
+const getAllDishes = async () => {
+	const allDishes = await axios.get(`${baseUrl}/dishwithmainingredient`)
+	return allDishes.data
+}
+
 const getUniqueMainIngredientsWithDishes = async () => {
 	const uniqueMainIngredientsWithDishesList = await axios.get(`${baseUrl}/uniquemainingredientswithdishes`)
 	return uniqueMainIngredientsWithDishesList.data
@@ -37,12 +42,19 @@ const addNewDish = async (newDish) => {
 	return response.data
 }
 
+const deleteDish = async (dish_id) => {
+	const response = await axios.delete(`${baseUrl}/dishbyid/${dish_id}`)
+	return response.data
+}
+
 const dishService = {
+	getAllDishes,
 	getUniqueMainIngredientsWithDishes,
 	getAllMainIngredients,
 	getRandomDishWithSelectedMainIngredient,
 	addNewMainIngredient,
-	addNewDish
+	addNewDish,
+	deleteDish
 }
 
 export default dishService

@@ -35,7 +35,22 @@ export const AddMainIngredientForm = () => {
 		event.preventDefault()
 		const newMainIngredient2 = event.currentTarget.newMainIngredient2.value
 		event.currentTarget.newMainIngredient2.value = ''
-		console.log(newMainIngredient2)
+		// console.log(newMainIngredient2)
+		if (newMainIngredient2 === '') {
+			dispatch(setNotification('Error: must provide new ingredient name!', 3000))
+			return
+		}
+		// console.log(notice)
+		// setRandStr(notice)
+		try {
+			await dishService.addNewMainIngredient(newMainIngredient2)
+			dispatch(initializeAllMainIngredients())
+			dispatch(setNotification(`${newMainIngredient2} added to Main Ingredients List!`, 3000))
+
+		} catch (error) {
+			console.log(error)
+			dispatch(setNotification(`Error adding new main ingredient`, 3000))
+		}
 		// if (newMainIngredient === '') {
 		// 	dispatch(setNotification('Error: must provide new ingredient name!', 3000))
 		// 	return

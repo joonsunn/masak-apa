@@ -26,6 +26,9 @@ function NavBar() {
 			<Nav.Item>
 				<Nav.Link as={Link} to='/addNewDish'>Add New Dish</Nav.Link>
 			</Nav.Item>
+			<Nav.Item>
+				<Nav.Link as={Link} to='/admin'>Admin Page</Nav.Link>
+			</Nav.Item>
     	</Nav>
 	</>
   )

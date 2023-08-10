@@ -16,6 +16,8 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Root from './routes/root';
 import { Navbar, Nav } from 'react-bootstrap';
+import { AdminPage } from './components/AdminPage';
+import { initializeAllDishes } from './reducers/allDishesReducer';
 
 
 
@@ -28,6 +30,7 @@ function App() {
 			dispatch(initializeSelectedMainIngredient())
 			dispatch(initializeRandomDish())
 			dispatch(initializeAllMainIngredients())
+			dispatch(initializeAllDishes())
 		}
 		runFirst()
 
@@ -45,6 +48,7 @@ function App() {
 							<Route path='/' element={<MainSelector></MainSelector>}/>
 							<Route path='/addMainIngredient' element={<AddMainIngredientForm></AddMainIngredientForm>}></Route>
 							<Route path='/addNewDish' element={<AddNewDishForm></AddNewDishForm>}></Route>
+							<Route path='/admin' element={<AdminPage></AdminPage>}></Route>
 							<Route path='*' element={<MainSelector></MainSelector>}></Route>
 					</Routes>
 				</div>

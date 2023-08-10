@@ -78,7 +78,7 @@
 
 .navbar {
 	justify-content: space-around;
-	max-width: 400px;
+	max-width: 50%;
 	margin: auto;
 	/* align-self: center; */
 }
