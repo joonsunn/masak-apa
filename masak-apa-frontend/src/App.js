@@ -15,7 +15,7 @@ import MainSelector from './components/MainSelector';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Root from './routes/root';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { AdminPage } from './components/AdminPage';
 import { initializeAllDishes } from './reducers/allDishesReducer';
 
@@ -43,7 +43,7 @@ function App() {
 			<div className="App">
 				<NavBar></NavBar>
 				<Notification></Notification>
-				<div className='container'>
+				<Container>
 					<Routes>
 							<Route path='/' element={<MainSelector></MainSelector>}/>
 							<Route path='/addMainIngredient' element={<AddMainIngredientForm></AddMainIngredientForm>}></Route>
@@ -51,7 +51,7 @@ function App() {
 							<Route path='/admin' element={<AdminPage></AdminPage>}></Route>
 							<Route path='*' element={<MainSelector></MainSelector>}></Route>
 					</Routes>
-				</div>
+				</Container>
 			</div>
 		</BrowserRouter>
   );

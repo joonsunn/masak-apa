@@ -12,10 +12,10 @@ const notificationSlice = createSlice({
 		setNotificationStyle(state, action) {
 			const content = action.payload
 			const style = {
-				border: 'solid',
-				padding: 10,
-				borderWidth: 1,
-				marginBottom: 10
+				// border: 'solid',
+				// padding: 10,
+				// borderWidth: 1,
+				// marginBottom: 10
 			  }
 			// console.log(`action: ${JSON.stringify(action2)}`)
 			return {

@@ -15,7 +15,7 @@ dishRouter.get('/', async (request, response) => {
 
 dishRouter.get('/alldishes', async (request, response) => {
 	const allDishes = await Dish.findAll({})
-	const allDishes2 = await sequelize.query('SELECT dishes.id as dish_id, dishes.dish_name, main_ingredients.name as main_ingredient_name FROM dishes LEFT JOIN main_ingredients on dishes.main_ingredient_id = main_ingredients.id', {type: QueryTypes.SELECT})
+	const allDishes2 = await sequelize.query('SELECT dishes.id as dish_id, dishes.dish_name, main_ingredients.name as main_ingredient_name FROM dishes LEFT JOIN main_ingredients on dishes.main_ingredient_id = main_ingredients.id ORDER BY dishes.id', {type: QueryTypes.SELECT})
 	return response.json(allDishes2)
 })
 
@@ -119,11 +119,33 @@ dishRouter.post('/newdish', async (request, response) => {
 })
 
 dishRouter.get('/dishwithmainingredient', async (request, response) => {
-	const results = await sequelize.query('select dishes.id as dish_id, dishes.dish_name, main_ingredients.name as main_ingredient_name from dishes left join main_ingredients on dishes.main_ingredient_id = main_ingredients.id;', {type: QueryTypes.SELECT})
-
-	const chickenDishes = results.filter(result => result.main_ingredient_name === 'chicken')
+	const results = await sequelize.query('select dishes.id as dish_id, dishes.dish_name, main_ingredients.name as main_ingredient_name from dishes left join main_ingredients on dishes.main_ingredient_id = main_ingredients.id ORDER BY dishes.id;', {type: QueryTypes.SELECT})
 
 	return response.json(results)
+})
+
+dishRouter.put('/dishbyid/:id', async (request, response) => {
+	try {
+		const newMainIngredient = await MainIngredient.findOne({
+			where: {
+				name: request.body.main_ingredient_name
+			}
+		})
+
+		const newDishName = request.body.dish_name
+		
+		const dish = await Dish.findByPk(request.params.id)
+		dish.set({
+			dish_name: newDishName,
+			main_ingredient_id: newMainIngredient.id
+		})
+
+		const results = await dish.save()
+		
+		return response.json(results)
+	} catch (error) {
+		return response.status(400).json({error}).end()
+	}
 })
 
 module.exports = dishRouter

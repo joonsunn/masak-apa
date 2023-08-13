@@ -35,7 +35,6 @@ const addNewMainIngredient = async (newMainIngredient) => {
 	// console.log(JSON.stringify(main_ingredient))
 }
 
-//TODO
 const addNewDish = async (newDish) => {
 	const response = await axios.post(`${baseUrl}/newdish`, newDish)
 
@@ -47,6 +46,11 @@ const deleteDish = async (dish_id) => {
 	return response.data
 }
 
+const updateDish = async (dish_id, newDishData) => {
+	const response = await axios.put(`${baseUrl}/dishbyid/${dish_id}`, newDishData)
+	return response.data
+}
+
 const dishService = {
 	getAllDishes,
 	getUniqueMainIngredientsWithDishes,
@@ -54,6 +58,7 @@ const dishService = {
 	getRandomDishWithSelectedMainIngredient,
 	addNewMainIngredient,
 	addNewDish,
+	updateDish,
 	deleteDish
 }
 

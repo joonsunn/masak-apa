@@ -76,23 +76,6 @@ export const AddNewDishForm = () => {
 	return (
 		<div className="add-new-dish page-element">
 			<div>
-				{/* Add new dish? <button onClick={handleTogglable}>{buttonText}</button>
-				<div style={visible? {display:''}: {display: 'none'}}>
-				</div> */}
-				{/* <form onSubmit={event => handleSubmit(event)}>
-					Select a main ingredient from the dropdown: <select value={entryMainIngredient} onChange={event => {
-						// console.log(event.target.value)
-						setEntryMainIngredient(event.target.value)
-						}}>
-							{allMainIngredients.map((item, index) => <option value={item.name} key={index}>{item.name}</option>)}
-					</select>
-					<div>
-						<span>Enter Dish Name: </span>
-						<input name="newDish"></input>
-						<button type="submit">Submit</button>
-
-					</div>
-				</form> */}
 				<Form onSubmit={event => handleSubmit2(event)}>
 				<div className="new-dish-top">
 					

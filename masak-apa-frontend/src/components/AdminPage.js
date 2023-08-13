@@ -4,36 +4,22 @@ import { initializeAllDishes } from "../reducers/allDishesReducer"
 import { Dropdown, DropdownButton, Table } from "react-bootstrap"
 import dishService from "../services/dishService"
 import { setNotification } from "../reducers/notificationReducer"
+import { AdminTableRow } from "./AdminTableRow"
 
 export const AdminPage = () => {
 	const dispatch = useDispatch()
 	const allDishes = useSelector(state => state.allDishes)
-	// const dishesKey = Object.keys(allDishes[0])
 	useEffect(() => {
 		dispatch(initializeAllDishes())
 	}, [])
-
-	const handleDelete = async (dish) => {
-		try {
-			if (window.confirm(`Confirm delete dish name ${dish.dish_name} with id ${dish.dish_id}?`)) {
-				const response = await dishService.deleteDish(dish.dish_id)
-				dispatch(setNotification(`Dish name ${dish.dish_name} with id ${dish.dish_id} deleted`, 3000))
-				dispatch(initializeAllDishes())
-			} else {
-				dispatch(setNotification(`Dish deletion cancelled`, 3000))
-			}
-		} catch (error) {
-			dispatch(setNotification(`Error deleting dish id ${dish.dish_id}`, 3000))
-		}
-	}
 	
 	return (
 		<div>
-			<Table striped>
+			<Table striped className="admin-table">
 				<thead>
 					<tr>
-						<th>Dish ID</th>
-						<th>Dish Name</th>
+						<th className='dishId-col'>Dish ID</th>
+						<th className='dishName-col'>Dish Name</th>
 						<th>Main Ingredient Name</th>
 						<th>Action</th>
 					</tr>
@@ -41,15 +27,7 @@ export const AdminPage = () => {
 				<tbody>
 					{allDishes.map((dish, index) => {
 						return (
-							<tr key={index}>
-								<td>{dish.dish_id}</td>
-								<td>{dish.dish_name}</td>
-								<td>{dish.main_ingredient_name}</td>
-								<td><DropdownButton title='Actions'>
-										<Dropdown.Item onClick={() => console.log('clicked edit!')}>Edit</Dropdown.Item>
-										<Dropdown.Item onClick={() => handleDelete(dish)}>Delete</Dropdown.Item>
-									</DropdownButton></td>
-							</tr>
+							<AdminTableRow dish={dish} key={index}></AdminTableRow>
 						)
 					})}
 				</tbody>

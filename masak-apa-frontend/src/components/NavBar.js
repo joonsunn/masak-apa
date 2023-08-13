@@ -6,15 +6,8 @@ import { Nav } from 'react-bootstrap'
 function NavBar() {
   return (
 	<>
-		{/* <ul id='nav-list'>
-			<li><Link to=''>HOME</Link></li>
-			<li><Link to='/addMainIngredient'>Add Main Ingredient</Link></li>
-			<li><Link to='/addNewDish'>Add New Dish</Link></li>
-		</ul> */}
-
 		<Nav
 		defaultActiveKey='/'
-		// onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
 		variant='underline'
 		className='navbar'>
 			<Nav.Item>

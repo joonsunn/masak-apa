@@ -1,22 +1,22 @@
-.App {
+/* .App {
   text-align: center;
-  /* max-width: 500px; */
+  max-width: 500px;
   margin: auto;
   padding: 2vw;
-}
+} */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -25,33 +25,33 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .container {
-	padding: 30px;
+	padding: 1%;
+	margin: auto;
 }
-
-
 
 .page-element {
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	max-width: 500px;
 	margin: auto;
+	/* width: 80vw; */
+	min-width: 30vw;
 }
 
 #reroll-button {
@@ -61,12 +61,14 @@
 
 .main-ingredient-dropdown {
 	display:flex;
-	justify-content: space-between;
+	justify-content: center;
+	gap: 1vw;
 	align-items: center;
 }
 
 .main-ingredient-content > div {
 	padding: 20px;
+	text-align: center;
 	/* display:flex;
 	flex-direction: column; */
 	
@@ -78,13 +80,16 @@
 
 .navbar {
 	justify-content: space-around;
+	justify-self: center;
+	text-align: center;
 	max-width: 50%;
 	margin: auto;
-	/* align-self: center; */
+	align-self: center;
 }
 
 .new-ingredient-input {
 	display: flex;
+	gap: 5px;
 }
 
 .new-dish-top {
@@ -97,4 +102,39 @@
 
 .new-dish-input {
 	display: flex;
+}
+
+.admin-table {
+	max-width: 80%;
+	margin: auto;
+	justify-self: center;
+}
+
+.dishId-col {
+	width: 10%;
+}
+.dishAction-col {
+	/* display: flex; */
+	flex-direction: row;
+	/* flex-wrap: wrap; */
+	justify-content: center;
+	gap: 1vh;
+}
+
+.dishAction-col > button {
+	min-width: 80px;
+	margin: 2%;
+}
+
+.dishMainIngredient-col {
+	width: 25vh;
+}
+
+.dishName-col {
+	width: 25%;
+}
+
+td, th {
+	text-align: center;
+	vertical-align: middle;
 }
